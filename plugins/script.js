@@ -111,9 +111,16 @@ console.log(secConvert(1, 1, 1));
 
 // 9. Написать функцию, которая принимает количество секунд, переводит их в часы, минуты и секунды и возвращает в виде строки «чч:мм:сс».
 function hourConvert(sec) {
-    const h = Math.floor(sec / 3600);
-    const s = sec % 100;
-    const m = (sec - h * 3600 - s) / 60;
+    let h = Math.floor(sec / 3600);
+    let m = Math.floor(sec / 60) - (h * 60);
+    let s = sec % 60;
+    if (m < 10) { m = "0" + m; }
+    if (s < 10) { s = "0" + s; }
+    if (h >= 24) {
+        let d = Math.floor(h / 24),
+            nh = h - d * 24;
+        return `${d} day(s) and «${nh}:${m}:${s}»`
+    }
     return `«${h}:${m}:${s}»`;
 }
 console.log(hourConvert(15929));
